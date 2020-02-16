@@ -3,8 +3,6 @@ export const css =
     @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     .card {
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-        width:var(--main-width,350px);;
-        height:var(--main-height,500px);
         background-color:var(--main-bgcolor,#F6F7F8);
         font-family:'Roboto',sans-serif;
     }
@@ -77,6 +75,14 @@ export const css =
        --event-bgcolor:black;
        color:#fff;
        --label-color:#EE585F;
+    }
+    #footer-label{
+        margin-top:5px;
+        margin-right:15px;
+        float:right;
+    }
+    #members_count{
+        color: var(--footer-member-count,#fff);
     }
     .event{
         width:90%;

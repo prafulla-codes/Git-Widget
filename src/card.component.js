@@ -5,7 +5,6 @@ template.innerHTML=`
 <style>
 ${css}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/fontawesome.min.js"></script>
 
 <div class="card">
     <a id="group_link" target="_blank">
@@ -17,6 +16,7 @@ ${css}
     <div id="content">
     </div>
     <div id="footer">
+    <span id="footer-label"> <img src="./assets/user-solid.svg" class="icon"> <span id="members_count"> </span> </span>
     </div>
 </div>   
 `
@@ -29,10 +29,39 @@ class MeetupCard extends HTMLElement {
         this._shadowRoot.appendChild(template.content.cloneNode(true));
 
     }
+
+    static get observedAttributes() { 
+        return ['data-width', 'data-height']; 
+    }
+
+    attributeChangedCallback(attr, oldValue, newValue) {
+        if (attr == 'data-width' && oldValue != newValue) {
+            this[attr] = newValue;
+            this.setWidth();
+        }
+
+        if(attr == 'data-height' && oldValue != newValue && 'data-height' > '300px'){
+            this[attr] = newValue;
+            this.setHeight(newValue);
+        }
+    }
+
+    setWidth(){
+        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '350px';
+    }
+
+    setHeight(){
+        this._shadowRoot.querySelector(`.card`).style.height = this.dataset.width || '500px';
+
+    }
+
     connectedCallback(){
         
         // Mounted
         this.render();
+        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '350px';
+        this._shadowRoot.querySelector(`.card`).style.height = this.dataset.height || '500px';
+
     }
     
 
@@ -62,7 +91,8 @@ class MeetupCard extends HTMLElement {
         events_data.forEach(event=>{
 
             let a = document.createElement('a');
-            a.setAttribute('href',event.link)
+            a.setAttribute('href',event.link);
+            a.setAttribute('target','_blank')
             a.innerHTML=`
             <div class="event">
             <h4 style="text-align:left"> ${event.name} </h4>
@@ -94,7 +124,8 @@ class MeetupCard extends HTMLElement {
         this._shadowRoot.querySelector(`#header-group-name`).innerHTML=group_data.name;
         this._shadowRoot.querySelector(`#group_link`).setAttribute('href',group_data.link);
         this.fetchEvents();
-        
+        this._shadowRoot.querySelector(`#members_count`).innerHTML=group_data.members;
+
     }
 } 
 
