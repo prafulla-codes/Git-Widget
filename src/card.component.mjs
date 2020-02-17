@@ -9,19 +9,19 @@ ${css}
 <div class="card">
     <a id="group_link" target="_blank">
     <div id="header">
-    <img src="./assets/meetup-brands.svg" id='logo'>
+    <img src="assets/meetup-brands.svg" id='logo'>
     <h4 id="header-group-name"> </h4> 
     </div>
     </a>
     <div id="content">
     </div>
     <div id="footer">
-    <span id="footer-label"> <img src="./assets/user-solid.svg" class="icon"> <span id="members_count"> </span> </span>
+    <span id="footer-label"> <img src="assets/user-solid.svg" class="icon"> <span id="members_count"> </span> </span>
     </div>
 </div>   
 `
 
-class MeetupCard extends HTMLElement {
+class MeetupWidget extends HTMLElement {
     constructor(){
         super();
 
@@ -97,7 +97,7 @@ class MeetupCard extends HTMLElement {
             <div class="event">
             <h4 style="text-align:left"> ${event.name} </h4>
             <br>
-            <img src="./assets/calendar-alt-regular.svg" class="icon">&nbsp<span class="label">${this.reformatDate(event.local_date)}</span> <span class="label" style="float:right"><img src="./assets/user-check-solid.svg" class="icon"> ${event.yes_rsvp_count}+</span>
+            <img src="assets/calendar-alt-regular.svg" class="icon">&nbsp<span class="label">${this.reformatDate(event.local_date)}</span> <span class="label" style="float:right"><img src="./assets/user-check-solid.svg" class="icon"> ${event.yes_rsvp_count}+</span>
             <div>
             `
             this._shadowRoot.querySelector(`#content`).appendChild(a);
@@ -132,5 +132,5 @@ class MeetupCard extends HTMLElement {
 
 
 
-customElements.define('meetup-widget',MeetupCard);
+customElements.define('meetup-widget',MeetupWidget);
 
