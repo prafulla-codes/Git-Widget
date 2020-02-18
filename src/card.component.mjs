@@ -9,19 +9,19 @@ ${css}
 <div class="card">
     <a id="group_link" target="_blank">
     <div id="header">
-    <img src="assets/meetup-brands.svg" id='logo'>
+    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/meetup-brands_oq9g8h.svg" id='logo'>
     <h4 id="header-group-name"> </h4> 
     </div>
     </a>
     <div id="content">
     </div>
     <div id="footer">
-    <span id="footer-label"> <img src="assets/user-solid.svg" class="icon"> <span id="members_count"> </span> </span>
+    <span id="footer-label"> <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/user-solid_pjpskl.svg" class="icon"> <span id="members_count"> </span> </span>
     </div>
 </div>   
 `
 
-class MeetupWidget extends HTMLElement {
+export class MeetupWidget extends HTMLElement {
     constructor(){
         super();
 
@@ -97,7 +97,7 @@ class MeetupWidget extends HTMLElement {
             <div class="event">
             <h4 style="text-align:left"> ${event.name} </h4>
             <br>
-            <img src="assets/calendar-alt-regular.svg" class="icon">&nbsp<span class="label">${this.reformatDate(event.local_date)}</span> <span class="label" style="float:right"><img src="./assets/user-check-solid.svg" class="icon"> ${event.yes_rsvp_count}+</span>
+            <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036234/calendar-alt-regular_iq3e0b.svg" class="icon">&nbsp<span class="label">${this.reformatDate(event.local_date)}</span> <span class="label" style="float:right"><img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/user-check-solid_homxcf.svg" class="icon"> ${event.yes_rsvp_count}+</span>
             <div>
             `
             this._shadowRoot.querySelector(`#content`).appendChild(a);
