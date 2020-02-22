@@ -140,12 +140,13 @@ export class MeetupWidget extends HTMLElement {
             let group = await fetch(`https://api.meetup.com/${this.dataset.groupurl}`,{
                 method:"GET",
                 headers:{
-                    'Access-Control-Allow-Origin':'https://api.meetup.com/*'
+                    'Access-Control-Allow-Origin':`http://${document.location.host}`,
+                    'Access-Control-Allow-Headers':'application/json',
                 },
-                })
-    
+            })
+            console.log(group)
             let group_data = await group.json();
-            console.log(group_data)
+            console.log(group_data);
         }
     }
 } 
