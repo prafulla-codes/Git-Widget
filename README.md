@@ -6,5 +6,5 @@ Unofficial Widget to showcase the events which you have organized on meetup.com 
 
 
 
-[![Screenshot of the Meetup Widget](https://res.cloudinary.com/prafulla98/image/upload/v1582384084/Meetup-Widget/meetup_screenshot_s0ydeq.png?style=center)](#installation-and-usage)
+[![Screenshot of the Meetup Widget](https://res.cloudinary.com/prafulla98/image/upload/v1582385089/Meetup-Widget/ss_2_mymjm6.png?style=center)](#installation-and-usage)
 
