@@ -1,6 +1,6 @@
 {
   "name": "meetup-widget",
-  "version": "1.0.6-alpha.1",
+  "version": "1.0.0-stable",
   "description": "Unofficial Meetup Widget to showcase the events organized at meetup.com",
   "main": "dist/index.js",
   "module": "dist/index.js",

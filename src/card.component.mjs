@@ -113,19 +113,21 @@ export class MeetupWidget extends HTMLElement {
     async render(){
         console.log("Rendering the meetup widget");
         let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupurl}`,{
-        method:"GET",
-        headers:{
-            'Access-Control-Allow-Methods':'GET',
-            'Access-Control-Allow-Headers':'application/json',
-        }
-        })
+            method:"GET",
+            headers:{
+                'Access-Control-Allow-Methods':'GET',
+                'Access-Control-Allow-Headers':'application/json',
+            }
+            })
+
+    
+      
         let group_data = await group.json();
         console.log(group_data)
         this._shadowRoot.querySelector(`#header-group-name`).innerHTML=group_data.name;
         this._shadowRoot.querySelector(`#group_link`).setAttribute('href',group_data.link);
         this.fetchEvents();
         this._shadowRoot.querySelector(`#members_count`).innerHTML=group_data.members;
-
     }
 } 
 
