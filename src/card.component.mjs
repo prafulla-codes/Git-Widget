@@ -74,7 +74,7 @@ export class MeetupWidget extends HTMLElement {
 
    
        
-        let events = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupurl}/events?status=past`,{
+        let events = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupname}/events?status=past`,{
             method:"GET",
             headers:{
                 'Access-Control-Allow-Methods':'GET',
@@ -118,7 +118,7 @@ export class MeetupWidget extends HTMLElement {
         console.log("Rendering the meetup widget");
         if(this.dataset.mode!="production")
         {
-            let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupurl}`,{
+            let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupname}`,{
                 method:"GET",
                 headers:{
                     'Access-Control-Allow-Methods':'GET',
@@ -137,7 +137,7 @@ export class MeetupWidget extends HTMLElement {
         }
         else
         {
-            let group = await fetch(`https://api.meetup.com/${this.dataset.groupurl}`,{
+            let group = await fetch(`https://api.meetup.com/${this.dataset.groupname}`,{
                 method:"GET",
                 headers:{
                     'Access-Control-Allow-Origin':`http://${document.location.host}`,
