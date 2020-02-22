@@ -31,7 +31,7 @@ export class MeetupWidget extends HTMLElement {
     }
 
     static get observedAttributes() { 
-        return ['data-width', 'data-height']; 
+        return ['data-width', 'data-height',"data-mode"]; 
     }
 
     attributeChangedCallback(attr, oldValue, newValue) {
@@ -40,6 +40,10 @@ export class MeetupWidget extends HTMLElement {
             this.setWidth();
         }
 
+        if (attr == 'data-mode' && oldValue != newValue)
+        {
+            this[attr] = newValue;
+        }
         if(attr == 'data-height' && oldValue != newValue && 'data-height' > '300px'){
             this[attr] = newValue;
             this.setHeight(newValue);
@@ -112,22 +116,38 @@ export class MeetupWidget extends HTMLElement {
     }
     async render(){
         console.log("Rendering the meetup widget");
-        let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupurl}`,{
-            method:"GET",
-            headers:{
-                'Access-Control-Allow-Methods':'GET',
-                'Access-Control-Allow-Headers':'application/json',
-            }
-            })
-
+        if(this.dataset.mode!="production")
+        {
+            let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupurl}`,{
+                method:"GET",
+                headers:{
+                    'Access-Control-Allow-Methods':'GET',
+                    'Access-Control-Allow-Headers':'application/json',
+                }
+                })
     
-      
-        let group_data = await group.json();
-        console.log(group_data)
-        this._shadowRoot.querySelector(`#header-group-name`).innerHTML=group_data.name;
-        this._shadowRoot.querySelector(`#group_link`).setAttribute('href',group_data.link);
-        this.fetchEvents();
-        this._shadowRoot.querySelector(`#members_count`).innerHTML=group_data.members;
+        
+          
+            let group_data = await group.json();
+            console.log(group_data)
+            this._shadowRoot.querySelector(`#header-group-name`).innerHTML=group_data.name;
+            this._shadowRoot.querySelector(`#group_link`).setAttribute('href',group_data.link);
+            this.fetchEvents();
+            this._shadowRoot.querySelector(`#members_count`).innerHTML=group_data.members;
+        }
+        else
+        {
+            let group = await fetch(`https://api.meetup.com/${this.dataset.groupurl}`,{
+                method:"GET",
+                headers:{
+                   'Origin':'https://meetup-widget.netlify.com',
+                   'Authorization':'abc'
+                }
+                })
+    
+            let group_data = await group.json();
+            console.log(group_data)
+        }
     }
 } 
 
