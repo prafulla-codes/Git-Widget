@@ -1,7 +1,7 @@
 {
-  "name": "meetup-widget",
-  "version": "1.0.0-stable",
-  "description": "Unofficial Meetup Widget to showcase the events organized at meetup.com",
+  "name": "git-widget",
+  "version": "1.0.0",
+  "description": "Showcase your github project's on their official websites/blogs.",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pika1998/Meetup-Widget.git"
+    "url": "git+https://github.com/Pika1998/Git-Widget.git"
   },
   "keywords": [
     "meetup.com",
@@ -20,9 +20,9 @@
   "author": "Prafulla Raichurkar",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Pika1998/Meetup-Widget/issues"
+    "url": "https://github.com/Pika1998/Git-Widget/issues"
   },
-  "homepage": "https://github.com/Pika1998/Meetup-Widget#readme",
+  "homepage": "https://github.com/Pika1998/Git-Widget#readme",
   "devDependencies": {
     "serve": "^11.3.0"
   }
