@@ -7,21 +7,31 @@ ${css}
 </style>
 
 <div class="card">
-    <a id="group_link" target="_blank">
     <div id="header">
-    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/meetup-brands_oq9g8h.svg" id='logo'>
-    <h4 id="header-group-name"> </h4> 
-    </div>
+    <a id="project_link" target="_blank">
+    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582632790/git-widget/github-brands_ap0by4.svg" id='logo'>
+    <h4 id="header-projectid"> </h4> 
     </a>
+    <br>
+    <br>
+    <h4 id="header-description"> </h4>
+
+    </div>
+  
     <div id="content">
     </div>
     <div id="footer">
-    <span id="footer-label"> <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/user-solid_pjpskl.svg" class="icon"> <span id="members_count"> </span> </span>
+    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582634736/git-widget/star-solid_imdbmt.svg" class='footer-icon' id="star_logo" title='Stargazers' >
+    <h4 class='footer-label' id='star_count' title='Stargazers'> </h4>
+    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582635429/git-widget/eye-regular_lfwidc.svg" class='footer-icon' id='watch_logo' title='Subscribers'>
+    <h4 class='footer-label' id='subscribers_count' title='Subscribers'> </h4>
+    <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582634861/git-widget/code-branch-solid_dgx2pa.svg" class='footer-icon' id='fork_logo' title='Forks'>
+    <h4 class='footer-label' id='fork_count' title='Forks'> </h4>
     </div>
 </div>   
 `
 
-export class MeetupWidget extends HTMLElement {
+export class GitWidget extends HTMLElement {
     constructor(){
         super();
 
@@ -51,7 +61,7 @@ export class MeetupWidget extends HTMLElement {
     }
 
     setWidth(){
-        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '350px';
+        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '400px';
     }
 
     setHeight(){
@@ -63,96 +73,90 @@ export class MeetupWidget extends HTMLElement {
         
         // Mounted
         this.render();
-        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '350px';
+        this._shadowRoot.querySelector(`.card`).style.width = this.dataset.width || '400px';
         this._shadowRoot.querySelector(`.card`).style.height = this.dataset.height || '500px';
 
     }
     
 
 
-   async fetchEvents(){
-
-   
-       
-        let events = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupname}/events?status=past`,{
-            method:"GET",
-            headers:{
-                'Access-Control-Allow-Methods':'GET',
-                'Access-Control-Allow-Headers':'application/json',
-            }
-        })
-       
-        let event_data = await events.json();
-        event_data = event_data.sort(function(a,b){
-            return new Date(b.local_date) - new Date(a.local_date);
-        })
-        console.log(event_data)
-        // Render The Events
-        this.renderEvents(event_data);
-    }
-
-    renderEvents(events_data){
-        events_data.forEach(event=>{
-
-            let a = document.createElement('a');
-            a.setAttribute('href',event.link);
-            a.setAttribute('target','_blank')
-            a.innerHTML=`
-            <div class="event">
-            <h4 style="text-align:left"> ${event.name} </h4>
+    async renderEvents(){
+        let events_data = await fetch(`https://api.github.com/repos/${this.dataset.projectid}/events`);
+        let events = await events_data.json();
+        console.log(events)
+        events.forEach(event=>{
+            let e = document.createElement('div');
+            let created_at = new Date(event.created_at);
+            e.setAttribute('class','event');
+            e.innerHTML=`
+            <img src="${event.actor.avatar_url}" class="event_user_icon">
+            <div class="event_header">
+            <h4 class="event_username"> ${event.actor.login} </h4> <span class='date' style='float:right'>${created_at.getDay()+1}/${created_at.getMonth()+1}/${created_at.getFullYear()}</span>
             <br>
-            <img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036234/calendar-alt-regular_iq3e0b.svg" class="icon">&nbsp<span class="label">${this.reformatDate(event.local_date)}</span> <span class="label" style="float:right"><img src="https://res.cloudinary.com/prafulla98/image/upload/v1582036248/user-check-solid_homxcf.svg" class="icon"> ${event.yes_rsvp_count}+</span>
-            <div>
-            `
-            this._shadowRoot.querySelector(`#content`).appendChild(a);
+            <span class="event_type"> ${event.type.split("Event")[0]} ${event.type=="ReleaseEvent" ? "</span><span class='release_tag'>"+event.payload.release.tag_name+"</span>" : ""} </h4>
+            
+            </div>
+            <br>
+            <div class="event_description">
+                <h5 class="event_message"> ${event.type=='PushEvent'? event.payload.commits[0].message : '' } </h5>
+                <h5 class="event_message"> ${event.type=='PullRequestReviewCommentEvent'? event.payload.comment.body+" <br><br> commit - <br><span style='color:blue'><a href='"+event.payload.comment.html_url+"' target='_blank'>"+event.payload.comment.commit_id+"</span></a>" : '' } </h5>
+                <h5 class="event_message" style="color:darkgreen"> ${event.type=='ForkEvent'? "Forked The Repository! " : '' } </h5>
+                <h5 class="event_message"> ${event.type=='PullRequestEvent' && event.payload.action=='opened'? "Opened A New PR ! "+"<br> <span style='color:blue'><a href='"+event.payload.pull_request.html_url+"' target='_blank'>"+event.payload.pull_request.title+"</span></a>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='PullRequestEvent' && event.payload.action=='closed'? "Closed The PR : "+"<br> <span style='color:blue'><a href='"+event.payload.pull_request.html_url+"' target='_blank'>"+event.payload.pull_request.title+"</span></a>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='IssuesEvent' && event.payload.action=='closed'? "Closed the Issue:  "+"<br> <span style='color:blue'>"+event.payload.issue.title+"</span>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='IssuesEvent' && event.payload.action=='opened'? "Opened the Issue:  "+"<br> <span style='color:blue'>"+event.payload.issue.title+"</span>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='WatchEvent' ? "<span color='blue> Is now watching the repository </span>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='IssueCommentEvent'? "<a href='"+event.payload.comment.html_url+"' target='_blank'>"+ event.payload.comment.body+"</a>" : '' } </h5>
+                <h5 class="event_message" style="color:darkgreen"> ${event.type=='ReleaseEvent'? "<a href='"+event.payload.release.html_url+"' target='_blank'>"+ "Released A New Version ! ^_^" +"</a>" : '' } </h5>
 
+                </div>
+            `
+            this._shadowRoot.querySelector(`#content`).appendChild(e)
         })
+        console.log(events);
     }
 
+    
     reformatDate(dateStr)
     {
       let dArr = dateStr.split("-");  // ex input "2010-01-18"
       return dArr[2]+ "-" +dArr[1]+ "-" +dArr[0] //ex out: "18/01/10"
     }
+
     async render(){
-        console.log("Rendering the meetup widget");
-        if(this.dataset.mode!="production")
-        {
-            let group = await fetch(`https://cors-anywhere.herokuapp.com/https://api.meetup.com/${this.dataset.groupname}`,{
-                method:"GET",
-                headers:{
-                    'Access-Control-Allow-Methods':'GET',
-                    'Access-Control-Allow-Headers':'application/json',
-                }
-                })
-    
+        console.log("Rendering the git-project widget");
+            
+            let project_data = await fetch(`https://api.github.com/repos/${this.dataset.projectid}`)
+            let project = await project_data.json();
+            if(project.message)
+            {
+                this._shadowRoot.querySelector(`#content`).innerHTML=`<h4> Something went wrong '_'. Please check your projectid </h4>`
+            }
+            else
+            {
+                console.log(project);
+
+            // Render the widget details 
+            this._shadowRoot.querySelector(`#header-description`).innerHTML=project.description;
+            this._shadowRoot.querySelector(`#star_count`).innerHTML=project.stargazers_count;
+            this._shadowRoot.querySelector(`#subscribers_count`).innerHTML=project.subscribers_count;
+            this._shadowRoot.querySelector(`#fork_count`).innerHTML=project.forks_count;
+
+            this._shadowRoot.querySelector(`#header-projectid`).innerHTML=this.dataset.projectid;
+            this._shadowRoot.querySelector(`#project_link`).setAttribute('href',`https://github.com/${this.dataset.projectid}`);
+            
+            this.renderEvents();
+        }
+       
+
+
+
         
-          
-            let group_data = await group.json();
-            console.log(group_data)
-            this._shadowRoot.querySelector(`#header-group-name`).innerHTML=group_data.name;
-            this._shadowRoot.querySelector(`#group_link`).setAttribute('href',group_data.link);
-            this.fetchEvents();
-            this._shadowRoot.querySelector(`#members_count`).innerHTML=group_data.members;
-        }
-        else
-        {
-            let group = await fetch(`https://api.meetup.com/${this.dataset.groupname}`,{
-                method:"GET",
-                headers:{
-                    'Access-Control-Allow-Origin':`http://${document.location.host}`,
-                    'Access-Control-Allow-Headers':'application/json',
-                },
-            })
-            console.log(group)
-            let group_data = await group.json();
-            console.log(group_data);
-        }
     }
 } 
 
 
 
 
-customElements.define('meetup-widget',MeetupWidget);
+customElements.define('git-widget',GitWidget);
 
