@@ -41,3 +41,10 @@ import 'git-widget'
 | data-width    | Width of the card             | 400px                    |
 | data-height   | Height of the card            | 500px
 
+# Changelog
+
+**[RELEASES](https://github.com/Pika1998/Git-Widget/releases)**
+
+# Contribution
+
+Feel free to contribute to git widget, checkout [CONTRIBUTING.md](CONTRIBUTING.md) 
