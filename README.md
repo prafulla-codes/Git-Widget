@@ -5,7 +5,7 @@
 
 ### A Detailed timeline of contributions done on your project. 💖
 
-
+## Codepen - https://codepen.io/Prafulla1998/pen/OJVNzxP
 
 [![Screenshot of the Git Widget](https://res.cloudinary.com/prafulla98/image/upload/v1582651061/git-widget/git-widget-ss_rsyvpl.png)](#installation-and-usage)
 
