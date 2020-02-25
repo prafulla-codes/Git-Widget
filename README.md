@@ -1,8 +1,9 @@
-# Meetup Widget 
+# Git Widget 
 
-Codepen - https://codepen.io/Prafulla1998/pen/OJVNzxP 
 
-Unofficial Widget to showcase the events which you have organized on meetup.com 📅
+### Showcase your projects on their official websites/blogs.
+
+### A Detailed timeline of contributions done on your project. 
 
 
 
@@ -10,12 +11,12 @@ Unofficial Widget to showcase the events which you have organized on meetup.com 
 
 # Installation & Usage
 
-You can install meetup-widget using two ways.
+You can install git-widget using two ways.
 
 ## 1 - Using Script
 
 ```html
-    <meetup-widget data-groupurl="Mumbai-Flutter"></meetup-widget>
+    <git-widget data-projectid="Pika1998/CYOMS"></git-widget>
     <!-- Place script tag before the end of the body tag -->
     <script src="" type="module"></script>
 ```
@@ -24,19 +25,19 @@ You can install meetup-widget using two ways.
 
 This can be used in React, Vue and almost any other frontend framework 
 ```sh
-npm install --save meetup-widget
+npm install --save git-widget
 ```
 
 Inside your framework component
 ```js
-import 'meetup-widget'
+import 'git-widget'
 ```
 
 # Attributes 
 
 | attributes    | description                   | default                  | 
 |---------------|-------------------------------|--------------------------|
-| data-groupname | Your meetup.com Username          |                          |
-| data-width    | Width of the card             | 350px                    |
+| data-projectid | < Your Github UserID > / < Project you want to showcase>         |                          |
+| data-width    | Width of the card             | 400px                    |
 | data-height   | Height of the card            | 500px
-| data-mode     | Set this to **production** while deploying in a realtime environment             | 
+
