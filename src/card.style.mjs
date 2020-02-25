@@ -2,8 +2,7 @@ export const css =
 `
     @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
     .card {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-        background-color:var(--main-bgcolor,#F6F7F8);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);        background-color:var(--main-bgcolor,#F6F7F8);
         font-family:'Roboto',sans-serif;
     }
     .card * {

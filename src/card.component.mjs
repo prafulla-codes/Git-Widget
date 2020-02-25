@@ -105,7 +105,7 @@ export class GitWidget extends HTMLElement {
                 <h5 class="event_message"> ${event.type=='PullRequestEvent' && event.payload.action=='closed'? "Closed The PR : "+"<br> <span style='color:blue'><a href='"+event.payload.pull_request.html_url+"' target='_blank'>"+event.payload.pull_request.title+"</span></a>" : '' } </h5>
                 <h5 class="event_message"> ${event.type=='IssuesEvent' && event.payload.action=='closed'? "Closed the Issue:  "+"<br> <span style='color:blue'>"+event.payload.issue.title+"</span>" : '' } </h5>
                 <h5 class="event_message"> ${event.type=='IssuesEvent' && event.payload.action=='opened'? "Opened the Issue:  "+"<br> <span style='color:blue'>"+event.payload.issue.title+"</span>" : '' } </h5>
-                <h5 class="event_message"> ${event.type=='WatchEvent' ? "<span color='blue> Is now watching the repository </span>" : '' } </h5>
+                <h5 class="event_message"> ${event.type=='WatchEvent' ? "<span style='color:blue'> Is now watching the repository </span>" : '' } </h5>
                 <h5 class="event_message"> ${event.type=='IssueCommentEvent'? "<a href='"+event.payload.comment.html_url+"' target='_blank'>"+ event.payload.comment.body+"</a>" : '' } </h5>
                 <h5 class="event_message" style="color:darkgreen"> ${event.type=='ReleaseEvent'? "<a href='"+event.payload.release.html_url+"' target='_blank'>"+ "Released A New Version ! ^_^" +"</a>" : '' } </h5>
 

@@ -1,13 +1,13 @@
 # Git Widget 
 
 
-### Showcase your projects on their official websites/blogs.
+### Showcase your projects on their official websites/blogs. 👨‍💻👩‍💻
 
-### A Detailed timeline of contributions done on your project. 
+### A Detailed timeline of contributions done on your project. 💖
 
 
 
-[![Screenshot of the Meetup Widget](https://res.cloudinary.com/prafulla98/image/upload/v1582385089/Meetup-Widget/ss_2_mymjm6.png?style=center)](#installation-and-usage)
+[![Screenshot of the Git Widget](https://res.cloudinary.com/prafulla98/image/upload/v1582651061/git-widget/git-widget-ss_rsyvpl.png)](#installation-and-usage)
 
 # Installation & Usage
 

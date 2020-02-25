@@ -1,1 +1,1 @@
-export * from './card.component.mjs';
+export * from './card.component.mjs';gi
