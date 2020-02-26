@@ -71,8 +71,8 @@ export const css =
     }
 
     #content{
-        max-height:90%;
-        min-height:90%;
+        max-height:60%;
+        min-height:60%;
         overflow-y:scroll;
         padding:0;
         padding-top:13px;
