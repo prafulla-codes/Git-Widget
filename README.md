@@ -1,4 +1,7 @@
 # Git Widget 
+![NPM Downloads](https://img.shields.io/npm/dt/git-widget)
+[![NPM Version](https://img.shields.io/npm/v/git-widget)](#npm)
+[![Contributions](https://img.shields.io/badge/contributions-welcome-green)](#contributions)
 
 
  Showcase your projects on their official websites/blogs. 👨‍💻👩‍💻
