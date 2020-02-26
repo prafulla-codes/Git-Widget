@@ -21,7 +21,7 @@ You can install git-widget using two ways.
 ```html
     <git-widget data-projectid="Pika1998/CYOMS"></git-widget>
     <!-- Place script tag before the end of the body tag -->
-    <script src="" type="module"></script>
+    <script src="https://unpkg.com/git-widget@1.0.0/dist/card.component.mjs" type="module"></script>
 ```
 
 ## 2 - As NPM Module
