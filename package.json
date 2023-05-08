@@ -24,6 +24,6 @@
   },
   "homepage": "https://github.com/Pika1998/Git-Widget#readme",
   "devDependencies": {
-    "serve": "^11.3.0"
+    "serve": "^14.2.0"
   }
 }
